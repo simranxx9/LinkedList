@@ -3,7 +3,7 @@
     // code here
      
     if(temp1 == NULL) return temp2;
-    if(temp1 == NULL) return temp2;
+    if(temp2 == NULL) return temp1;
     if(temp1->data > temp2->data) 
         swap(temp1, temp2);
     
@@ -12,7 +12,7 @@
     while(temp1!=NULL && temp2!=NULL)
     {
         Node* temp =NULL;
-        while(temp1!=NULL && temp1->data < temp2->data)
+        while(temp1!=NULL && temp1->data <= temp2->data)
         {
             temp = temp1;
             temp1 = temp1->next;
