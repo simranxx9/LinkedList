@@ -1,0 +1,18 @@
+LLNode* solve(LLNode* node, int k) {
+    LLNode* temp = node;
+    LLNode* prev = NULL, *next = NULL;
+
+    int count = k;
+if(node == NULL) return NULL;
+    while(temp!=NULL && count--)
+    {
+        next = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = next;
+    }
+     node->next = solve(temp, k);
+
+    return prev;
+
+}
