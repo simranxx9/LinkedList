@@ -1,0 +1,38 @@
+Node *mergeSortedList(Node* temp1, Node* temp2)
+{
+    
+    if(temp1 == NULL) return temp2;
+    if(temp2 == NULL) return temp1;
+    if(temp1->data > temp2->data) 
+        swap(temp1, temp2);
+    
+    Node* res = temp1;
+    
+    while(temp1!=NULL && temp2!=NULL)
+    {
+        Node* temp =NULL;
+        while(temp1!=NULL && temp1->data <= temp2->data)
+        {
+            temp = temp1;
+            temp1 = temp1->bottom;
+            
+        }
+        
+        temp->bottom = temp2;
+        swap(temp1, temp2);
+    }
+  
+    return res;
+}
+
+Node *flatten(Node *root)
+{
+   // Your code here
+   if(root == NULL || root->next == NULL) return root;
+   // bring root to last of the root;
+   root->next = flatten(root->next);
+   
+   root = mergeSortedList(root, root->next);
+   
+   return root;
+}
