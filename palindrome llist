@@ -20,3 +20,51 @@ bool isPalindrome(Node *head)
         }
         return true;
     }
+
+// 0(1) space complexity
+Node* middle(Node* root)
+    {
+        Node* prev;
+        Node *slow = root, *fast = root;
+        while(fast!=NULL and fast->next!=NULL)
+        {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        prev->next = NULL;
+        return slow;
+    }
+    Node* rever(Node* root)
+    {
+        Node* prev = NULL, *next = NULL, *temp = root;
+        while(temp)
+        {
+            next = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = next;
+        }
+        return prev;
+    }
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        if(head ==NULL or head->next == NULL) return true;
+        
+        Node* mid = middle(head);
+        Node* rev = rever(mid);
+        
+        Node* temp = head;
+        
+        while(temp and rev)
+        {
+            if(temp->data!= rev->data)
+                return false;
+                
+            temp = temp->next;
+            rev = rev->next;
+        }
+        return true;
+        
+    }
