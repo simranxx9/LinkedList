@@ -1,31 +1,24 @@
-Node* rotate(Node* head, int k)
+ Node* rotate(Node* head, int k)
     {
         // Your code here
-        Node* temp = head;
-        Node *res = new Node(0);
-        Node* beg = res;
-        if(temp->next == NULL || temp == NULL) return temp;
-        Node* temp2 = head;
-        int count = 0;
-        while(temp2)
+        Node* slow = head;
+        Node* fast = head;
+        int flag = 0;
+        while(k--)
         {
-            count++;
-            temp2 = temp2->next;
+            if(fast!=NULL and fast->next!=NULL)
+                slow = fast,fast = fast->next;
+            else
+                flag = 1;
         }
-        k = k%count;
+        if(flag) return head;
+        slow -> next = NULL;
         
-        if(k == 0) return head;
-        count = 1;
-        while(count<k && temp!=NULL)
-        {
-            temp = temp->next;count++;
-        }
-        beg->next = temp->next;
-        temp->next = nullptr;
-        while(beg->next!=NULL)
-        {
-            beg = beg->next;
-        }
-        beg -> next  = head;
+        Node* res = new Node(0);
+        res->next =fast;
+        while(fast!=NULL and fast->next!=NULL)
+            fast = fast->next;
+        fast->next = head;
+        
         return res->next;
     }
